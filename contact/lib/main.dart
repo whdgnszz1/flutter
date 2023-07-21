@@ -25,7 +25,12 @@ class _MyAppState extends State<MyApp> {
           floatingActionButton: FloatingActionButton(
               onPressed: (){
                 showDialog(context: context, builder: (context){
-                  return DialogUI(state: a);
+
+                  return DialogUI(state: a, addA: (){
+                    setState(() {
+                      a++;
+                    });
+                  });
                   //   Dialog(child:
                   //   Container(
                   //     height: 200,
@@ -76,8 +81,9 @@ class _MyAppState extends State<MyApp> {
 
 // Dialog
 class DialogUI extends StatelessWidget {
-  const DialogUI({Key? key, this.state}) : super(key: key);
+  const DialogUI({Key? key, this.state, this.addA}) : super(key: key);
   final dynamic state;
+  final dynamic addA;
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +94,10 @@ class DialogUI extends StatelessWidget {
         child: Column(
           children: [
             TextField(),
-            TextButton(onPressed: () {}, child: Text("완료")), // 닫는 괄호 추가
+            TextButton(onPressed: () {
+              print(state);
+              addA?.call();
+            }, child: Text("완료")),
             TextButton(
               onPressed: () {
                 Navigator.pop(context);

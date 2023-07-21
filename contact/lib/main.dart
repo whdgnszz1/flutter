@@ -59,20 +59,42 @@ class Footer extends StatelessWidget {
 
 
 
-class UserList extends StatelessWidget {
+class UserList extends StatefulWidget {
   final String name;
-  const UserList({required this.name, Key? key}) : super(key: key);
+  UserList({required this.name, Key? key}) : super(key: key);
+
+  @override
+  State<UserList> createState() => _UserListState();
+}
+
+class _UserListState extends State<UserList> {
+  var a = 0;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 50,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Image.asset('placeholder.png'),
-          Text(name)
+          Row(
+            children: [
+              Text(a.toString()),
+              Text(widget.name),
+            ],
+          ),
+          ElevatedButton(
+            onPressed: () {
+              setState(() {
+                a++;
+              });
+            },
+            child: Text('좋아요'),
+          ),
         ],
       ),
     );
   }
 }
+
+

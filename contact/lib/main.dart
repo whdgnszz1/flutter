@@ -19,6 +19,8 @@ class MyApp extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               child: Container(
                 width: double.infinity, height: 50,
+                margin: EdgeInsets.all(20),
+                padding: EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   color: Colors.blue,
                   border: Border.all(color: Colors.black)

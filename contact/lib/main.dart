@@ -15,10 +15,19 @@ class MyApp extends StatelessWidget {
               title: Text('앱임', textAlign: TextAlign.left,),
               centerTitle: false,
             ),
-            body: Text('안녕'),
-            bottomNavigationBar: BottomAppBar(
+            body: Align(
+              alignment: Alignment.bottomCenter,
               child: Container(
-                height: 80, // 원하는 높이로 설정
+                width: double.infinity, height: 50,
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  border: Border.all(color: Colors.black)
+                ),
+              ),
+            ),
+            bottomNavigationBar: BottomAppBar(
+              child: SizedBox(
+                height: 70, // 원하는 높이로 설정
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,

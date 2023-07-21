@@ -15,8 +15,23 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+
+  var total = 3;
   var a = 1;
   var name = ['김영숙','홍길동', '피자집'];
+
+  addOne(){
+    setState(() {
+      total++;
+    });
+  }
+
+  addFriend(newFriend){
+    setState(() {
+      name.add(newFriend);
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +41,7 @@ class _MyAppState extends State<MyApp> {
               onPressed: (){
                 showDialog(context: context, builder: (context){
 
-                  return DialogUI(state: a, addA: (){
-                    setState(() {
-                      a++;
-                    });
-                  });
+                  return DialogUI(addOne: addOne, addFriend: addFriend);
                   //   Dialog(child:
                   //   Container(
                   //     height: 200,
@@ -64,9 +75,9 @@ class _MyAppState extends State<MyApp> {
                 });
               },
           ),
-          appBar: AppBar( title: Text("연락처 앱"), centerTitle: false,),
+          appBar: AppBar( title: Text(total.toString()), centerTitle: false,),
           body: ListView.builder(
-            itemCount: 3,
+            itemCount: name.length,
             itemBuilder: (context, i){
               return ListTile(
                 leading: Image.asset('placeholder.png'),
@@ -80,10 +91,17 @@ class _MyAppState extends State<MyApp> {
 }
 
 // Dialog
-class DialogUI extends StatelessWidget {
-  const DialogUI({Key? key, this.state, this.addA}) : super(key: key);
-  final dynamic state;
-  final dynamic addA;
+class DialogUI extends StatefulWidget {
+  DialogUI({Key? key, this.addOne, this.addFriend}) : super(key: key);
+  final dynamic addOne;
+  final dynamic addFriend;
+
+  @override
+  State<DialogUI> createState() => _DialogUIState();
+}
+
+class _DialogUIState extends State<DialogUI> {
+  var inputData = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -93,10 +111,11 @@ class DialogUI extends StatelessWidget {
         height: 300,
         child: Column(
           children: [
-            TextField(),
+            TextField( controller: inputData,),
             TextButton(onPressed: () {
-              print(state);
-              addA?.call();
+              widget.addOne();
+              widget.addFriend(inputData.text);
+              Navigator.pop(context);
             }, child: Text("완료")),
             TextButton(
               onPressed: () {

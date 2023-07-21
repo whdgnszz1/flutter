@@ -25,7 +25,36 @@ class _MyAppState extends State<MyApp> {
           floatingActionButton: FloatingActionButton(
               onPressed: (){
                 showDialog(context: context, builder: (context){
-                  return Dialog(child: Text('안녕'),);
+                  return Dialog(child:
+                    Container(
+                      height: 200,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("Contact", textAlign: TextAlign.left,),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextField(
+                              // You can customize the text field with various properties
+                              decoration: InputDecoration(
+                                labelText: 'Enter your name',
+                                border: OutlineInputBorder(),
+                              ),
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              TextButton(onPressed: (){
+                                Navigator.pop(context); // Dialog 닫기
+                              }, child: Text("Cancel")),
+                              TextButton(onPressed: (){}, child: Text("OK")),
+                            ],
+                          )
+                        ],
+                      ),
+                    )
+                  );
                 });
               },
           ),

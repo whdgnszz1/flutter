@@ -12,12 +12,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         home: Scaffold(
           appBar: AppBar(),
-          body: ListView(
-            children: [
-              UserList(),
-              UserList(),
-              UserList()
-            ],
+          body: ListView.builder(
+            itemCount: 3,
+            itemBuilder: (context, i){
+              return Text(i.toString());},
           ) ,
           bottomNavigationBar: Footer(),
         )

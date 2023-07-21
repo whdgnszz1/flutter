@@ -4,29 +4,29 @@ void main() {
   runApp( MyApp());
 }
 
-class MyApp extends StatelessWidget {
+
+class MyApp extends StatefulWidget {
   MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   var a = 1;
+  var name = ['김영숙','홍길동', '피자집'];
 
   @override
   Widget build(BuildContext context) {
 
     return MaterialApp(
         home: Scaffold(
-          floatingActionButton: FloatingActionButton(
-            child: Text(a.toString()),
-            onPressed: (){
-              print(a);
-              a++;
-            },
-          ),
-          appBar: AppBar(),
+          appBar: AppBar( title: Text("연락처 앱"), centerTitle: false,),
           body: ListView.builder(
             itemCount: 3,
             itemBuilder: (context, i){
               print(i);
-              return UserList();
+              return UserList(name: name[i]);
               },
           ) ,
           bottomNavigationBar: Footer(),
@@ -60,7 +60,8 @@ class Footer extends StatelessWidget {
 
 
 class UserList extends StatelessWidget {
-  const UserList({super.key});
+  final String name;
+  const UserList({required this.name, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +70,7 @@ class UserList extends StatelessWidget {
       child: Row(
         children: [
           Image.asset('placeholder.png'),
-          Text('홍길동')
+          Text(name)
         ],
       ),
     );

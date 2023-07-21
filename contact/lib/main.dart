@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp( MyApp());
+  runApp( MaterialApp(
+      home: MyApp()
+  ));
 }
 
 
@@ -19,20 +21,26 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
 
-    return MaterialApp(
-        home: Scaffold(
+    return  Scaffold(
+          floatingActionButton: FloatingActionButton(
+              onPressed: (){
+                showDialog(context: context, builder: (context){
+                  return Dialog(child: Text('안녕'),);
+                });
+              },
+          ),
           appBar: AppBar( title: Text("연락처 앱"), centerTitle: false,),
           body: ListView.builder(
             itemCount: 3,
             itemBuilder: (context, i){
-              print(i);
-              return UserList(name: name[i]);
+              return ListTile(
+                leading: Image.asset('placeholder.png'),
+                title: Text(name[i]),
+              );
               },
           ) ,
           bottomNavigationBar: Footer(),
-        )
-    );
-
+        );
   }
 }
 

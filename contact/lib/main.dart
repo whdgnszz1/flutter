@@ -25,36 +25,37 @@ class _MyAppState extends State<MyApp> {
           floatingActionButton: FloatingActionButton(
               onPressed: (){
                 showDialog(context: context, builder: (context){
-                  return Dialog(child:
-                    Container(
-                      height: 200,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Contact", textAlign: TextAlign.left,),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: TextField(
-                              // You can customize the text field with various properties
-                              decoration: InputDecoration(
-                                labelText: 'Enter your name',
-                                border: OutlineInputBorder(),
-                              ),
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              TextButton(onPressed: (){
-                                Navigator.pop(context); // Dialog 닫기
-                              }, child: Text("Cancel")),
-                              TextButton(onPressed: (){}, child: Text("OK")),
-                            ],
-                          )
-                        ],
-                      ),
-                    )
-                  );
+                  return DialogUI(state: a);
+                  //   Dialog(child:
+                  //   Container(
+                  //     height: 200,
+                  //     child: Column(
+                  //       crossAxisAlignment: CrossAxisAlignment.start,
+                  //       children: [
+                  //         Text("Contact", textAlign: TextAlign.left,),
+                  //         Padding(
+                  //           padding: const EdgeInsets.all(8.0),
+                  //           child: TextField(
+                  //             // You can customize the text field with various properties
+                  //             decoration: InputDecoration(
+                  //               labelText: 'Enter your name',
+                  //               border: OutlineInputBorder(),
+                  //             ),
+                  //           ),
+                  //         ),
+                  //         Row(
+                  //           mainAxisAlignment: MainAxisAlignment.end,
+                  //           children: [
+                  //             TextButton(onPressed: (){
+                  //               Navigator.pop(context); // Dialog 닫기
+                  //             }, child: Text("Cancel")),
+                  //             TextButton(onPressed: (){}, child: Text("OK")),
+                  //           ],
+                  //         )
+                  //       ],
+                  //     ),
+                  //   )
+                  // );
                 });
               },
           ),
@@ -73,6 +74,38 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
+// Dialog
+class DialogUI extends StatelessWidget {
+  const DialogUI({Key? key, this.state}) : super(key: key);
+  final dynamic state;
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      child: SizedBox(
+        width: 300,
+        height: 300,
+        child: Column(
+          children: [
+            TextField(),
+            TextButton(onPressed: () {}, child: Text("완료")), // 닫는 괄호 추가
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text("취소"),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+
+
+// footer
 class Footer extends StatelessWidget {
   const Footer({super.key});
 
@@ -96,6 +129,7 @@ class Footer extends StatelessWidget {
 
 
 
+// 유저리스트
 class UserList extends StatefulWidget {
   final String name;
   UserList({required this.name, Key? key}) : super(key: key);

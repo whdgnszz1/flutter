@@ -145,7 +145,9 @@ class _HomeState extends State<Home> {
           itemBuilder: (c, i){
             return Column(
               children: [
-                Image.network(widget.list[i]["image"]),
+                (widget.list[i]["image"] is File)
+                    ? Image.file(widget.list[i]["image"])
+                    : Image.network(widget.list[i]["image"]),
                 Container(
                   constraints: BoxConstraints(maxWidth: 600),
                   padding: EdgeInsets.all(20),
@@ -181,13 +183,14 @@ class Upload extends StatelessWidget {
         actions: [ TextButton(onPressed: (){
           var newList = {
             'id': 4,
-            'image': userImage.path,
+            'image': userImage,
             'likes': 10,
             'date': '7월 22일',
             'content': inputData.text,
             'user': '종훈'
           };
           addList(newList);
+          Navigator.pop(context);
         }, child: Text("등록하기")) ],
       ),
       body: Column(

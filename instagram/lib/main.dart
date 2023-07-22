@@ -32,16 +32,14 @@ class MyApp extends StatelessWidget {
           ],
       ),
       body: Text('안녕', style: Theme.of(context).textTheme.bodyText2,),
-      bottomNavigationBar: BottomAppBar(
-        height: 70,
-        child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              IconButton(onPressed: (){}, icon: Icon(Icons.home_outlined)),
-              IconButton(onPressed: (){}, icon: Icon(Icons.shopping_bag_outlined))
-            ],
-          ),
-        ),
+      bottomNavigationBar: BottomNavigationBar(
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: "홈"),
+          BottomNavigationBarItem(icon: Icon(Icons.shopping_bag_outlined), label: "샵"),
+        ],
+      ),
     );
   }
 }

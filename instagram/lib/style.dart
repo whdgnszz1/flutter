@@ -6,6 +6,9 @@ var theme = ThemeData(
   //     backgroundColor: Colors.grey,
   //   )
   // ),
+  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    selectedItemColor: Colors.black
+  ),
   iconTheme: IconThemeData(color: Colors.black), // 아이콘의 기본 색상을 지정
   appBarTheme: AppBarTheme(
     color: Colors.white,

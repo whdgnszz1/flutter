@@ -1,21 +1,9 @@
 import 'package:flutter/material.dart';
+import './style.dart' as style;
 
 void main() {
   runApp(MaterialApp(
-      theme: ThemeData(
-        iconTheme: IconThemeData(color: Colors.black), // 아이콘의 기본 색상을 지정
-        appBarTheme: AppBarTheme(
-          color: Colors.white,
-          iconTheme: IconThemeData(
-            color: Colors.black,
-            size: 40
-          ), // AppBar 내의 아이콘 색상을 지정
-        ),
-        textTheme: TextTheme(
-          bodyText2: TextStyle(color: Colors.black), // 기본 텍스트 스타일을 지정
-        ),
-      )
-,
+      theme: style.theme,
     home: const MyApp()
   ));
 }
@@ -32,13 +20,21 @@ class MyApp extends StatelessWidget {
     return  Scaffold(
       appBar: AppBar(
         title: DefaultTextStyle(
-          style: TextStyle(color: Colors.black, fontSize: 20),
+          style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600),
           child: Text('Instagram'),
         ),
         centerTitle: false,
-        actions: [Icon(Icons.add_box_outlined)],
+        actions: [
+          IconButton(
+              onPressed: (){},
+              icon: Icon(Icons.add_box_outlined)
+          )
+          ],
       ),
-      body: (Text("안녕", style: a,)),
+      body: Theme(
+        data: ThemeData(),
+        child: Container()
+      ),
     );
   }
 }

@@ -47,6 +47,7 @@ class _MyAppState extends State<MyApp> {
     getData();
   }
 
+  // 전체 레이아웃
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -58,8 +59,13 @@ class _MyAppState extends State<MyApp> {
         centerTitle: false,
         actions: [
           IconButton(
-              onPressed: (){},
-              icon: Icon(Icons.add_box_outlined)
+              onPressed: (){
+                Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Upload() )
+                );
+              },
+              icon: Icon(Icons.add_box_outlined),
+              iconSize: 30,
           )
           ],
       ),
@@ -82,7 +88,7 @@ class _MyAppState extends State<MyApp> {
 }
 
 
-
+// 메인페이지
 class Home extends StatefulWidget {
   Home({Key? key, this.list, this.addList}) : super(key: key);
   final list;
@@ -148,7 +154,29 @@ class _HomeState extends State<Home> {
     } else {
       return Text("로딩중임");
     }
+  }
+}
 
+// 이미지 업로드 페이지
+class Upload extends StatelessWidget {
+  const Upload({Key? key}) : super(key:key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('이미지 업로드 화면'),
+          IconButton(
+              onPressed: (){
+                Navigator.pop(context);
+              }, 
+              icon: Icon(Icons.close))
+        ],
+      ),
+    );
   }
 }
 

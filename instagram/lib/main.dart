@@ -71,11 +71,9 @@ class _MyAppState extends State<MyApp> {
                     userImage = File(image.path);
                   });
                 }
-
-
-
+                print(userImage);
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (c) => Upload( userImage: userImage )));
+                    MaterialPageRoute(builder: (c) => Upload( userImage: userImage, addList: addList )));
               },
               icon: Icon(Icons.add_box_outlined),
               iconSize: 30,
@@ -172,18 +170,32 @@ class _HomeState extends State<Home> {
 
 // 이미지 업로드 페이지
 class Upload extends StatelessWidget {
-  const Upload({Key? key, this.userImage}) : super(key:key);
+  Upload({Key? key, this.userImage, this.addList}) : super(key:key);
   final userImage;
+  final addList;
+  var inputData = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [ TextButton(onPressed: (){
+          var newList = {
+            'id': 4,
+            'image': userImage.path,
+            'likes': 10,
+            'date': '7월 22일',
+            'content': inputData.text,
+            'user': '종훈'
+          };
+          addList(newList);
+        }, child: Text("등록하기")) ],
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Image.file(userImage),
           Text('이미지 업로드 화면'),
-          TextField(),
+          TextField(controller: inputData,),
           IconButton(
               onPressed: (){
                 Navigator.pop(context);

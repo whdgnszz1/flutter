@@ -10,8 +10,14 @@ void main() {
 
 var a = TextStyle();
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  var tab = 0;
 
 
 
@@ -31,15 +37,21 @@ class MyApp extends StatelessWidget {
           )
           ],
       ),
-      body: Text('안녕', style: Theme.of(context).textTheme.bodyText2,),
+      body: [Text('홈페이지'), Text("샵페이지")][tab],
       bottomNavigationBar: BottomNavigationBar(
         showSelectedLabels: false,
         showUnselectedLabels: false,
+        onTap: (i){
+          setState(() {
+            tab = i;
+          });
+        },
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: "홈"),
           BottomNavigationBarItem(icon: Icon(Icons.shopping_bag_outlined), label: "샵"),
         ],
       ),
+
     );
   }
 }

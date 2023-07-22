@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import './style.dart' as style;
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 void main() {
   runApp(MaterialApp(
@@ -18,8 +20,25 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   var tab = 0;
+  var list = [];
 
+  getData() async {
+    try {
+      var result = await http.get(Uri.parse('https://codingapple1.github.io/app/data.json'));
+      print( jsonDecode(result.body) );
+      setState(() {
+        list = jsonDecode(result.body);
+      });
+    } catch (error) {
+      print("Error fetching data: $error");
+    }
+  }
 
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,14 +56,7 @@ class _MyAppState extends State<MyApp> {
           )
           ],
       ),
-      body: [
-        ListView.builder(
-          itemCount: 3,
-          itemBuilder: (context,i) {
-            return MainCard();
-          }),
-        Text("샵페이지")]
-      [tab],
+      body: [ Home(list: list), Text("샵페이지")][tab],
       bottomNavigationBar: BottomNavigationBar(
         showSelectedLabels: false,
         showUnselectedLabels: false,
@@ -64,23 +76,33 @@ class _MyAppState extends State<MyApp> {
 
 
 
-class MainCard extends StatelessWidget {
-  const MainCard({super.key});
-
+class Home extends StatelessWidget {
+  Home({Key? key, this.list}) : super(key: key);
+  final dynamic list;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+
+    return ListView.builder(itemCount: list.length, itemBuilder: (c, i){
+      return Column(
         children: [
-          Image.asset('placeholder.png', fit: BoxFit.cover, width:double.infinity,),
-          Text('좋아요 100', style: TextStyle(fontWeight: FontWeight.w600),),
-          Text('글쓴이'),
-          Text('글내용'),
+          Image.network(list[i]["image"]),
+          Container(
+            constraints: BoxConstraints(maxWidth: 600),
+            padding: EdgeInsets.all(20),
+            width: double.infinity,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(list[i]["likes"].toString()),
+                Text(list[i]["user"]),
+                Text(list[i]["content"]),
+              ],
+            ),
+          )
         ],
-      ),
-    );
+      );
+    });
+
   }
 }
 

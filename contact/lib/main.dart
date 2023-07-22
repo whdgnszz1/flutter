@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
-
+import 'package:contacts_service/contacts_service.dart';
 
 void main() {
   runApp( MaterialApp(
@@ -22,6 +22,13 @@ class _MyAppState extends State<MyApp> {
     var status = await Permission.contacts.status;
     if (status.isGranted) {
       print('허락됨');
+      var contacts = await ContactsService.getContacts();
+      // print(contacts[0].familyName);
+      var newPerson = Contact();
+      newPerson.givenName= "민수";
+      newPerson.familyName= "김";
+      ContactsService.addContact(newPerson);
+      
     } else if (status.isDenied) {
       print('거절됨');
       Permission.contacts.request();

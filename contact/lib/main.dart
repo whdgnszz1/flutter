@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
+
 
 void main() {
   runApp( MaterialApp(
@@ -15,6 +17,16 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+
+  getPermission() async {
+    var status = await Permission.contacts.status;
+    if (status.isGranted) {
+      print('허락됨');
+    } else if (status.isDenied) {
+      print('거절됨');
+      Permission.contacts.request();
+    }
+  }
 
   var total = 3;
   var a = 1;
@@ -75,12 +87,14 @@ class _MyAppState extends State<MyApp> {
                 });
               },
           ),
-          appBar: AppBar( title: Text(total.toString()), centerTitle: false,),
+          appBar: AppBar( title: Text(total.toString()), centerTitle: false, actions: [
+            IconButton(onPressed: (){ getPermission(); }, icon: Icon(Icons.contacts))
+          ],),
           body: ListView.builder(
             itemCount: name.length,
             itemBuilder: (context, i){
               return ListTile(
-                leading: Image.asset('placeholder.png'),
+                leading: Image.asset('assets/placeholder.png'),
                 title: Text(name[i]),
               );
               },
@@ -93,8 +107,8 @@ class _MyAppState extends State<MyApp> {
 // Dialog
 class DialogUI extends StatefulWidget {
   DialogUI({Key? key, this.addOne, this.addFriend}) : super(key: key);
-  final dynamic addOne;
-  final dynamic addFriend;
+  final addOne;
+  final addFriend;
 
   @override
   State<DialogUI> createState() => _DialogUIState();

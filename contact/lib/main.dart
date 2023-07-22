@@ -23,11 +23,14 @@ class _MyAppState extends State<MyApp> {
     if (status.isGranted) {
       print('허락됨');
       var contacts = await ContactsService.getContacts();
+      setState(() {
+        name = contacts;
+      });
       // print(contacts[0].familyName);
-      var newPerson = Contact();
-      newPerson.givenName= "민수";
-      newPerson.familyName= "김";
-      ContactsService.addContact(newPerson);
+      // var newPerson = Contact();
+      // newPerson.givenName= "민수";
+      // newPerson.familyName= "김";
+      // ContactsService.addContact(newPerson);
       
     } else if (status.isDenied) {
       print('거절됨');
@@ -37,7 +40,7 @@ class _MyAppState extends State<MyApp> {
 
   var total = 3;
   var a = 1;
-  var name = ['김영숙','홍길동', '피자집'];
+  var name = [];
 
   addOne(){
     setState(() {
@@ -102,7 +105,7 @@ class _MyAppState extends State<MyApp> {
             itemBuilder: (context, i){
               return ListTile(
                 leading: Image.asset('assets/placeholder.png'),
-                title: Text(name[i]),
+                title: Text(name[i].givenName ?? "이름 없음"),
               );
               },
           ) ,

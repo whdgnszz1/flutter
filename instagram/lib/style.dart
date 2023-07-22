@@ -16,7 +16,4 @@ var theme = ThemeData(
     titleTextStyle: TextStyle(color: Colors.black, fontSize: 25),
     actionsIconTheme: IconThemeData(color: Colors.black),
   ),
-  textTheme: TextTheme(
-    bodyText2: TextStyle(color: Colors.red), // 기본 텍스트 스타일을 지정
-  ),
 );

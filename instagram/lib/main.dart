@@ -37,7 +37,14 @@ class _MyAppState extends State<MyApp> {
           )
           ],
       ),
-      body: [Text('홈페이지'), Text("샵페이지")][tab],
+      body: [
+        ListView.builder(
+          itemCount: 3,
+          itemBuilder: (context,i) {
+            return MainCard();
+          }),
+        Text("샵페이지")]
+      [tab],
       bottomNavigationBar: BottomNavigationBar(
         showSelectedLabels: false,
         showUnselectedLabels: false,
@@ -51,7 +58,28 @@ class _MyAppState extends State<MyApp> {
           BottomNavigationBarItem(icon: Icon(Icons.shopping_bag_outlined), label: "샵"),
         ],
       ),
+    );
+  }
+}
 
+
+
+class MainCard extends StatelessWidget {
+  const MainCard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Image.asset('placeholder.png', fit: BoxFit.cover, width:double.infinity,),
+          Text('좋아요 100', style: TextStyle(fontWeight: FontWeight.w600),),
+          Text('글쓴이'),
+          Text('글내용'),
+        ],
+      ),
     );
   }
 }

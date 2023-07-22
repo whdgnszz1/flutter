@@ -3,6 +3,9 @@ import './style.dart' as style;
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter/rendering.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+
 
 void main() {
   runApp(MaterialApp(
@@ -22,6 +25,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   var tab = 0;
   var list = [];
+  var userImage;
 
   getData() async {
     try {
@@ -59,10 +63,19 @@ class _MyAppState extends State<MyApp> {
         centerTitle: false,
         actions: [
           IconButton(
-              onPressed: (){
+              onPressed: () async {
+                var picker = ImagePicker();
+                var image = await picker.pickImage(source: ImageSource.gallery);
+                if(image != null) {
+                  setState(() {
+                    userImage = File(image.path);
+                  });
+                }
+
+
+
                 Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Upload() )
-                );
+                    MaterialPageRoute(builder: (c) => Upload( userImage: userImage )));
               },
               icon: Icon(Icons.add_box_outlined),
               iconSize: 30,
@@ -159,8 +172,8 @@ class _HomeState extends State<Home> {
 
 // 이미지 업로드 페이지
 class Upload extends StatelessWidget {
-  const Upload({Key? key}) : super(key:key);
-
+  const Upload({Key? key, this.userImage}) : super(key:key);
+  final userImage;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -168,7 +181,9 @@ class Upload extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Image.file(userImage),
           Text('이미지 업로드 화면'),
+          TextField(),
           IconButton(
               onPressed: (){
                 Navigator.pop(context);

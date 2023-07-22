@@ -14,6 +14,6 @@ var theme = ThemeData(
     actionsIconTheme: IconThemeData(color: Colors.black),
   ),
   textTheme: TextTheme(
-    bodyText2: TextStyle(color: Colors.black), // 기본 텍스트 스타일을 지정
+    bodyText2: TextStyle(color: Colors.red), // 기본 텍스트 스타일을 지정
   ),
 );

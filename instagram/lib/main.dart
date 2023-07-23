@@ -9,8 +9,11 @@ import 'package:provider/provider.dart';
 
 
 void main() {
-  runApp(ChangeNotifierProvider(
-    create: (c) => Store1(),
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (c) => Store1()),
+      ChangeNotifierProvider(create: (c) => Store2()),
+    ],
     child: MaterialApp(
         theme: style.theme,
       home: const MyApp()
@@ -234,11 +237,17 @@ class Upload extends StatelessWidget {
   }
 }
 
+
+class Store2 extends ChangeNotifier {
+
+}
+
+
 class Store1 extends ChangeNotifier {
   var name = 'john kim';
   var follower = 0;
-  changeName(){
-    name = 'john park';
+  addFollower() {
+    follower++;
     notifyListeners();
   }
 
@@ -255,15 +264,18 @@ class Profile extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text(context.watch<Store1>().name) ,),
       body: Padding(
-        padding: const EdgeInsets.all(12.0),
+        padding: const EdgeInsets.all(0),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Image.asset('assets/placeholder.png',width: 40),
+            CircleAvatar(
+              radius: 30,
+              backgroundImage: AssetImage('assets/placeholder.png'),
+            ),
             Text('팔로워 ${context.watch<Store1>().follower}명'),
             ElevatedButton(onPressed: (){
-              context.read<Store1>().changeName();
-            }, child: Text('버튼'))
+              context.read<Store1>().addFollower();
+            }, child: Text('팔로우'))
           ],
         ),
       ),

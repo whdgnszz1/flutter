@@ -155,6 +155,26 @@ class _HomeState extends State<Home> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      GestureDetector(
+                        child: Text(widget.list[i]["user"]),
+                        onTap: (){
+                          Navigator.push(context,
+                            // MaterialPageRoute(builder: (c) => Text('위젯')
+                            PageRouteBuilder(
+                                pageBuilder: (context, a1, a2) => Profile(),
+                                transitionsBuilder: (context, a1, a2 ,child) =>
+                                    SlideTransition(
+                                        position: Tween(
+                                          begin: Offset(-1.0, 0.0),
+                                          end: Offset(0.0, 0.0),
+                                        ).animate(a1),
+                                    child: child,)
+                                  // FadeTransition(opacity: a1, child: child,),
+                                // transitionDuration: Duration(milliseconds: 500)
+                                )
+                          );
+                        },
+                      ),
                       Text('좋아요 ${widget.list[i]["likes"]}'),
                       Text(widget.list[i]["date"]),
                       Text(widget.list[i]["content"]),
@@ -210,3 +230,15 @@ class Upload extends StatelessWidget {
   }
 }
 
+// Profile
+class Profile extends StatelessWidget {
+  const Profile({Key? key}) : super(key:key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Text('프로필 페이지'),
+    );
+  }
+}

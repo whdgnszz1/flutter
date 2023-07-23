@@ -236,6 +236,7 @@ class Upload extends StatelessWidget {
 
 class Store1 extends ChangeNotifier {
   var name = 'john kim';
+  var follower = 0;
   changeName(){
     name = 'john park';
     notifyListeners();
@@ -253,12 +254,18 @@ class Profile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(context.watch<Store1>().name) ,),
-      body: Column(
-        children: [
-          ElevatedButton(onPressed: (){
-            context.read<Store1>().changeName();
-          }, child: Text('버튼'))
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Image.asset('assets/placeholder.png',width: 40),
+            Text('팔로워 ${context.watch<Store1>().follower}명'),
+            ElevatedButton(onPressed: (){
+              context.read<Store1>().changeName();
+            }, child: Text('버튼'))
+          ],
+        ),
       ),
     );
   }

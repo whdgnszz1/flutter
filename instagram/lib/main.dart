@@ -5,12 +5,16 @@ import 'dart:convert';
 import 'package:flutter/rendering.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import 'package:provider/provider.dart';
 
 
 void main() {
-  runApp(MaterialApp(
-      theme: style.theme,
-    home: const MyApp()
+  runApp(ChangeNotifierProvider(
+    create: (c) => Store1(),
+    child: MaterialApp(
+        theme: style.theme,
+      home: const MyApp()
+    ),
   ));
 }
 
@@ -230,6 +234,17 @@ class Upload extends StatelessWidget {
   }
 }
 
+class Store1 extends ChangeNotifier {
+  var name = 'john kim';
+  changeName(){
+    name = 'john park';
+    notifyListeners();
+  }
+
+}
+
+
+
 // Profile
 class Profile extends StatelessWidget {
   const Profile({Key? key}) : super(key:key);
@@ -237,8 +252,14 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: Text('프로필 페이지'),
+      appBar: AppBar(title: Text(context.watch<Store1>().name) ,),
+      body: Column(
+        children: [
+          ElevatedButton(onPressed: (){
+            context.read<Store1>().changeName();
+          }, child: Text('버튼'))
+        ],
+      ),
     );
   }
 }

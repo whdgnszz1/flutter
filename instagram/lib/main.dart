@@ -251,6 +251,7 @@ class Store1 extends ChangeNotifier {
     notifyListeners();
   }
 
+
 }
 
 
@@ -263,22 +264,41 @@ class Profile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(context.watch<Store1>().name) ,),
-      body: Padding(
-        padding: const EdgeInsets.all(0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            CircleAvatar(
-              radius: 30,
-              backgroundImage: AssetImage('assets/placeholder.png'),
-            ),
-            Text('팔로워 ${context.watch<Store1>().follower}명'),
-            ElevatedButton(onPressed: (){
-              context.read<Store1>().addFollower();
-            }, child: Text('팔로우'))
-          ],
+      body: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: ProfileHeader(),
+          ),
+          SliverGrid(
+              delegate: SliverChildBuilderDelegate(
+                (c, i) => Container( color: Colors.grey,),
+                childCount: 19
+              ),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2)),
+        ],
+      )
+    );
+  }
+}
+
+
+class ProfileHeader extends StatelessWidget {
+  const ProfileHeader({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        CircleAvatar(
+          radius: 30,
+          backgroundImage: AssetImage('assets/placeholder.png'),
         ),
-      ),
+        Text('팔로워 ${context.watch<Store1>().follower}명'),
+        ElevatedButton(onPressed: (){
+          context.read<Store1>().addFollower();
+        }, child: Text('팔로우'))
+      ],
     );
   }
 }

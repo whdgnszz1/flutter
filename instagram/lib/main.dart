@@ -7,11 +7,17 @@ import 'package:flutter/rendering.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 import 'notification.dart';
 
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (c) => Store1()),
@@ -58,7 +64,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    initNotification();
+    initNotification(context);
     getData();
 
   }
@@ -67,6 +73,9 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
+      floatingActionButton: FloatingActionButton(child: Text("+"), onPressed: () {
+        showNotification();
+      },),
       appBar: AppBar(
         title: DefaultTextStyle(
           style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600),

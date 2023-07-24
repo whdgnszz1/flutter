@@ -5,7 +5,7 @@ final notifications = FlutterLocalNotificationsPlugin();
 
 
 //1. 앱로드시 실행할 기본설정
-initNotification() async {
+initNotification(context) async {
 
   //안드로이드용 아이콘파일 이름
   var androidSetting = AndroidInitializationSettings('app_icon');
@@ -24,7 +24,12 @@ initNotification() async {
   await notifications.initialize(
     initializationSettings,
     //알림 누를때 함수실행하고 싶으면
-    //onSelectNotification: 함수명추가
+    onSelectNotification: (payload){
+      Navigator.push(context,
+        MaterialPageRoute(
+            builder: (context) => Text('새로운 페이지'))
+      );
+    }
   );
 }
 
@@ -52,6 +57,7 @@ showNotification() async {
       1,
       '제목1',
       '내용1',
-      NotificationDetails(android: androidDetails, iOS: iosDetails)
+      NotificationDetails(android: androidDetails, iOS: iosDetails),
+      payload: '부가정보'
   );
 }

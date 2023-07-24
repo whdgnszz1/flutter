@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "337910097944",
+    "project_id": "fluttergram-23c9c",
+    "storage_bucket": "fluttergram-23c9c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:337910097944:android:bfe1e9b8957a9876f97b6d",
+        "android_client_info": {
+          "package_name": "com.jonghun.instagram"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "337910097944-p7cebmplscbh8qt0due4s43h9acj8o6g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcgw7oXPzb2k8JzoXw7kjjxXgTCyYW1bY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "337910097944-p7cebmplscbh8qt0due4s43h9acj8o6g.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "337910097944-id87224hj9r59gn09qebrjepb65pnuc6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.jonghun.instagram"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

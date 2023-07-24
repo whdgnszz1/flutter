@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "682514458101",
+    "project_id": "fir-instagram-65ffc",
+    "storage_bucket": "fir-instagram-65ffc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:682514458101:android:1a659bad3658c4c84e2cbc",
+        "android_client_info": {
+          "package_name": "com.jonghun.firebaseinstagram"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "682514458101-2iu9n8hpoe0f4g58u0e08n0usn1o7qtn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoTVErLgQBs2IBi1Cl252K9namjdw7rW8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "682514458101-2iu9n8hpoe0f4g58u0e08n0usn1o7qtn.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "682514458101-cldu3bkhqe58maa94duvj62ppu1s4lce.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.jonghun.firebaseinstagram"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

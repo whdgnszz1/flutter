@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram/notification.dart';
+import 'package:instagram/shop.dart';
 import './style.dart' as style;
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -101,7 +102,7 @@ class _MyAppState extends State<MyApp> {
           )
           ],
       ),
-      body: [ Home(list: list, addList: addList), Text("샵페이지")][tab],
+      body: [ Home(list: list, addList: addList), Shop()][tab],
       bottomNavigationBar: BottomNavigationBar(
         showSelectedLabels: false,
         showUnselectedLabels: false,

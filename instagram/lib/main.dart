@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram/notification.dart';
 import './style.dart' as style;
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -6,6 +7,8 @@ import 'package:flutter/rendering.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:provider/provider.dart';
+
+import 'notification.dart';
 
 
 void main() {
@@ -55,7 +58,9 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    initNotification();
     getData();
+
   }
 
   // 전체 레이아웃

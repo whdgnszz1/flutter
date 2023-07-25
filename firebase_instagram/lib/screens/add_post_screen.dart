@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:firebase_instagram/models/user.dart';
 import 'package:firebase_instagram/providers/user_provider.dart';
+import 'package:firebase_instagram/resources/firestore_methods.dart';
 import 'package:firebase_instagram/utils/colors.dart';
 import 'package:firebase_instagram/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -22,14 +23,25 @@ class _AddPostScreenState extends State<AddPostScreen> {
   void postImage(
       String uid,
       String username,
-      String profileImage,
+      String profImage,
       ) async {
 
     try {
-
-    } catch(err) {
-
-    }
+      String res = await FirestoreMethods().uploadPost(
+          _descriptionController.text,
+          _file!,
+          uid,
+          username,
+          profImage,
+      );
+        if(res == 'success'){
+          showSnackBar("게시글 작성 완료!", context);
+        } else {
+          showSnackBar(res, context);
+        }
+      } catch(err) {
+        showSnackBar(err.toString(), context);
+      }
     }
 
 
@@ -105,7 +117,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
         centerTitle: false,
         actions: [
           TextButton(
-            onPressed: postImage,
+            onPressed: () => postImage(user.uid, user.username, user.photoUrl),
             child: const Text("Post", style: TextStyle(
             color: Colors.blueAccent,
             fontWeight: FontWeight.bold,

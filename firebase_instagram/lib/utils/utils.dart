@@ -15,3 +15,11 @@ Future<Uint8List?> pickImage(ImageSource source) async {
   print('이미지가 선택되지 않았습니다.');
   return null;
 }
+
+showSnackBar(String content, BuildContext context){
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+        content: Text(content),
+    ),
+  );
+}

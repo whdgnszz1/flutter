@@ -1,5 +1,5 @@
 import 'package:firebase_instagram/providers/user_provider.dart';
-import 'package:firebase_instagram/utils/dimensions.dart';
+import 'package:firebase_instagram/utils/global_variable.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

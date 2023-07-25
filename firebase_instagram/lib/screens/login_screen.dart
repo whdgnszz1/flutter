@@ -1,4 +1,8 @@
 import 'package:firebase_instagram/resources/auth_methods.dart';
+import 'package:firebase_instagram/responsive/mobile_screen_layout.dart';
+import 'package:firebase_instagram/responsive/responsive_layout_screen.dart';
+import 'package:firebase_instagram/responsive/web_screen_layout.dart';
+import 'package:firebase_instagram/screens/signup_screen.dart';
 import 'package:firebase_instagram/utils/colors.dart';
 import 'package:firebase_instagram/utils/utils.dart';
 import 'package:firebase_instagram/widgets/text_field_input.dart';
@@ -34,7 +38,15 @@ class _LoginScreenState extends State<LoginScreen> {
     );
 
     if(res == 'success') {
-      print("1");
+      // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const HomeScreen()));
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+              builder: (context) => const ResponsiveLayout(
+                mobileScreenLayout: MobileScreenLayout(),
+                webScreenLayout: WebScreenLayout(),
+              )
+          )
+      );
     } else {
       //
       showSnackBar(res, context);
@@ -42,7 +54,17 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() {
       _isLoading = false;
     });
+  }
 
+  void navigateToSignup(){
+    Navigator.of(context).push(
+        MaterialPageRoute(
+            builder: (context) => const ResponsiveLayout(
+              mobileScreenLayout: MobileScreenLayout(),
+              webScreenLayout: WebScreenLayout(),
+            )
+        )
+    );
   }
 
   @override
@@ -115,7 +137,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: (){},
+                    onTap: navigateToSignup,
                     child: Container(
                       child: const Text("회원가입", style: TextStyle(fontWeight: FontWeight.bold),),
                       padding: const EdgeInsets.symmetric(

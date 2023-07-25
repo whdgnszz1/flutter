@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 import 'package:firebase_instagram/resources/auth_methods.dart';
+import 'package:firebase_instagram/screens/login_screen.dart';
 import 'package:firebase_instagram/utils/colors.dart';
 import 'package:firebase_instagram/utils/utils.dart';
 import 'package:firebase_instagram/widgets/text_field_input.dart';
@@ -52,14 +53,32 @@ class _SignupScreenState extends State<SignupScreen> {
       file: _image!,
     );
     print(res);
-    if(res != 'success') {
-      showSnackBar(res, context);
-    }
 
     setState(() {
       _isLoading = false;
     });
+
+    if(res != 'success') {
+      showSnackBar(res, context);
+    } else {
+      Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => const SignupScreen(),
+          )
+      );
+    }
   }
+
+  void navigateToLogin(){
+    Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => const LoginScreen(),
+        )
+    );
+  }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -177,9 +196,9 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: (){},
+                    onTap: navigateToLogin,
                     child: Container(
-                      child: const Text("회원가입", style: TextStyle(fontWeight: FontWeight.bold),),
+                      child: const Text("로그인", style: TextStyle(fontWeight: FontWeight.bold),),
                       padding: const EdgeInsets.symmetric(
                           vertical: 8
                       ),

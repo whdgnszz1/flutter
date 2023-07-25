@@ -1,3 +1,4 @@
+import 'package:firebase_instagram/resources/auth_methods.dart';
 import 'package:firebase_instagram/utils/colors.dart';
 import 'package:firebase_instagram/widgets/text_field_input.dart';
 import 'package:flutter/material.dart';
@@ -104,6 +105,13 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               // button login
               InkWell(
+                onTap: () async {
+                  String res = await AuthMethods().signUpUser(
+                    email: _emailController.text,
+                    password: _passwordController.text,
+                    username: _usernameController.text,
+                    bio: _bioController.text,
+                    );},
                 child: Container(
                   child: const Text("회원가입"),
                   width: double.infinity,

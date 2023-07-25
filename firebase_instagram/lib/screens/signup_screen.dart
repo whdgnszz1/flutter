@@ -1,8 +1,11 @@
+import 'dart:typed_data';
 import 'package:firebase_instagram/resources/auth_methods.dart';
 import 'package:firebase_instagram/utils/colors.dart';
+import 'package:firebase_instagram/utils/utils.dart';
 import 'package:firebase_instagram/widgets/text_field_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:image_picker/image_picker.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({Key? key}) : super(key: key);
@@ -16,7 +19,7 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _bioController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
-
+  Uint8List? _image;
 
   @override
   void dispose() {
@@ -25,6 +28,15 @@ class _SignupScreenState extends State<SignupScreen> {
     _passwordController.dispose();
     _bioController.dispose();
     _usernameController.dispose();
+  }
+
+  void selectImage() async {
+    Uint8List? im = await pickImage(ImageSource.gallery);
+    if (im != null) {
+      setState(() {
+        _image = im;
+      });
+    }
   }
 
   @override
@@ -48,6 +60,11 @@ class _SignupScreenState extends State<SignupScreen> {
               // cicular widget to accept and show our selected file
               Stack(
                 children: [
+                  _image != null ?
+                   CircleAvatar(
+                    radius: 64,
+                    backgroundImage: MemoryImage(_image!),
+                  ) :
                   const CircleAvatar(
                     radius: 64,
                     backgroundImage: AssetImage('assets/placeholder.png'),
@@ -56,7 +73,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     bottom: -10,
                     left: 80,
                     child: IconButton(
-                    onPressed: (){},
+                    onPressed: selectImage,
                     icon: const Icon(
                         Icons.add_a_photo),
                     ),
@@ -96,7 +113,7 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               // text field input for bio
               TextFieldInput(
-                hintText: "bio를 입력해주세요.",
+                hintText: "직업을 입력해주세요.",
                 textEditingController: _bioController,
                 textInputType: TextInputType.text,
               ),
@@ -111,7 +128,10 @@ class _SignupScreenState extends State<SignupScreen> {
                     password: _passwordController.text,
                     username: _usernameController.text,
                     bio: _bioController.text,
-                    );},
+                    file: _image!,
+                    );
+                    print(res);
+                  },
                 child: Container(
                   child: const Text("회원가입"),
                   width: double.infinity,

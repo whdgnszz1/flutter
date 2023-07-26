@@ -1,5 +1,6 @@
 import 'package:firebase_instagram/screens/add_post_screen.dart';
 import 'package:firebase_instagram/screens/feed_screen.dart';
+import 'package:firebase_instagram/screens/profile_screen.dart';
 import 'package:firebase_instagram/screens/seearch_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -10,5 +11,5 @@ const homeScreenItems = [
   SearchScreen(),
   AddPostScreen(),
   Text('notif'),
-  Text('profile'),
+  ProfileScreen(),
 ];

@@ -1,8 +1,10 @@
 import 'package:firebase_instagram/utils/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class PostCard extends StatelessWidget {
-  const PostCard({super.key});
+  final snap;
+  const PostCard({Key? key, required this.snap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,9 @@ class PostCard extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 16,
-                  backgroundImage: AssetImage('assets/placeholder.png'),
+                  backgroundImage: NetworkImage(
+                    snap['profImage']
+                  ),
                 ),
                 Expanded(child: Padding(
                   padding: const EdgeInsets.only(
@@ -34,7 +38,7 @@ class PostCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'username',
+                        snap['username'],
                         style: TextStyle(
                             fontWeight: FontWeight.bold),
                       ),
@@ -67,7 +71,8 @@ class PostCard extends StatelessWidget {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.35 ,
             width: double.infinity,
-            child: Image.network('https://plus.unsplash.com/premium_photo-1690297971162-5fe7ddf2c48d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=916&q=80',
+            child: Image.network(
+              snap['postUrl'],
               fit: BoxFit.cover,
             ),
           ),
@@ -115,7 +120,9 @@ class PostCard extends StatelessWidget {
               children: [
                 DefaultTextStyle(
                     style: Theme.of(context).textTheme.subtitle2!.copyWith(fontWeight: FontWeight.w800),
-                    child: Text('좋아요 123개', style: Theme.of(context).textTheme.bodyText2,),
+                    child: Text(
+                      '좋아요 ${snap['likes'].length}개',
+                      style: Theme.of(context).textTheme.bodyText2,),
                 ),
                 Container(
                   width: double.infinity,
@@ -127,11 +134,11 @@ class PostCard extends StatelessWidget {
                       style: const TextStyle(color: primaryColor),
                       children: [
                         TextSpan(
-                          text: 'username',
+                          text: snap['username'],
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         TextSpan(
-                          text: 'description',
+                          text: ' ${snap['description']}',
                         )
                       ],
                     ),
@@ -151,7 +158,9 @@ class PostCard extends StatelessWidget {
                 ),
                 Container(
                   padding: const EdgeInsets.symmetric(vertical: 4),
-                  child: Text('23년 7월 26일', style: const TextStyle(
+                  child: Text(
+                    DateFormat.yMMMd().format(snap['datePublished'].toDate()),
+                    style: const TextStyle(
                       fontSize: 16,
                       color: secondaryColor
                   ),

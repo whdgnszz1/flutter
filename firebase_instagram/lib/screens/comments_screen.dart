@@ -1,4 +1,5 @@
 import 'package:firebase_instagram/utils/colors.dart';
+import 'package:firebase_instagram/widgets/comment_card.dart';
 import 'package:flutter/material.dart';
 
 class CommentsScreen extends StatefulWidget {

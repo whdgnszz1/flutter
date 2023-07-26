@@ -1,4 +1,5 @@
 import 'package:firebase_instagram/utils/colors.dart';
+import 'package:firebase_instagram/widgets/post_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -22,7 +23,7 @@ class FeedScreen extends StatelessWidget {
           )
         ],
       ),
-      body: ,
+      body: const PostCard(),
     );
   }
 }

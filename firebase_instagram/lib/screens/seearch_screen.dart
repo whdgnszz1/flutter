@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_instagram/screens/profile_screen.dart';
 import 'package:firebase_instagram/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -60,11 +61,21 @@ class _SearchScreenState extends State<SearchScreen> {
                   final photoUrl = doc.get('photoUrl') ?? 'default_image_url';
                   final username = doc.get('username') ?? '알 수 없음';
 
-                  return ListTile(
-                    leading: CircleAvatar(
-                      backgroundImage: NetworkImage(photoUrl),
+                  return InkWell(
+                    onTap: () => Navigator
+                        .of(context)
+                        .push(
+                        MaterialPageRoute(builder: (context) =>
+                        ProfileScreen(
+                            uid: (snapshot.data! as dynamic).docs[index]['uid'])
+                        ),
                     ),
-                    title: Text(username),
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        backgroundImage: NetworkImage(photoUrl),
+                      ),
+                      title: Text(username),
+                    ),
                   );
                 }
             );

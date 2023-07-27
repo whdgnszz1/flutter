@@ -24,7 +24,6 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -37,31 +36,40 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Instagram Clone',
         theme: ThemeData.dark().copyWith(
-          scaffoldBackgroundColor: mobileBackgroundColor
+          scaffoldBackgroundColor: mobileBackgroundColor,
         ),
-        home: StreamBuilder(
+        home: StreamBuilder<User?>(
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
-            if(snapshot.connectionState == ConnectionState.active) {
-              if(snapshot.hasData) {
-                return  const ResponsiveLayout(
+            // 로그인 상태가 확정되었을 때
+            if (snapshot.connectionState == ConnectionState.active) {
+              // 로그인한 사용자가 있을 때
+              if (snapshot.hasData) {
+                return const ResponsiveLayout(
                   mobileScreenLayout: MobileScreenLayout(),
                   webScreenLayout: WebScreenLayout(),
                 );
-              } else if (snapshot.hasError) {
-                return Center(
-                  child: Text('${snapshot.error}'),
-                );
               }
+              // 로그인한 사용자가 없을 때
+              return const LoginScreen();
             }
-            if(snapshot.connectionState == ConnectionState.waiting) {
+
+            // 에러가 발생했을 때
+            if (snapshot.hasError) {
               return Center(
-                child: CircularProgressIndicator(
-                  color: primaryColor,
+                child: Text(
+                  'An error occurred: ${snapshot.error}',
+                  style: TextStyle(color: Colors.red),
                 ),
               );
             }
-            return const LoginScreen();
+
+            // 로그인 상태를 확인 중일 때
+            return Center(
+              child: CircularProgressIndicator(
+                color: primaryColor,
+              ),
+            );
           },
         ),
       ),

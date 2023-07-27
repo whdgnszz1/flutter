@@ -131,7 +131,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    child: const Text("계정이 아직 없으신가요?"),
+                    child: const Text("계정이 아직 없으신가요? "),
                     padding: const EdgeInsets.symmetric(
                         vertical: 8
                     ),

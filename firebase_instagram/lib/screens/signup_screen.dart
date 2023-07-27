@@ -190,7 +190,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    child: const Text("계정이 아직 없으신가요?"),
+                    child: const Text("이미 가입된 계정이 있으신가요? "),
                     padding: const EdgeInsets.symmetric(
                         vertical: 8
                     ),

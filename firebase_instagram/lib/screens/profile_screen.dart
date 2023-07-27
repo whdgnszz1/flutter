@@ -39,7 +39,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       // get post length
       var postSnap = await FirebaseFirestore.instance
           .collection('posts')
-          .where("uid", isEqualTo: FirebaseAuth.instance.currentUser!.uid ).get();
+          .where("uid", isEqualTo: widget.uid ).get(); // widget.uid를 사용하여 게시물 조회
       postLength = postSnap.docs.length;
       userData = userSnap.data()!;
       followers = userSnap.data()!['followers'].length;

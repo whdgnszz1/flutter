@@ -27,7 +27,7 @@ class ConfigStore extends GetxController {
     _platform = await PackageInfo.fromPlatform();
   }
 
-  // 标记用户已打开APP
+  // 유저가 파일을 처음 열었는지 확인하는 코드
   Future<bool> saveAlreadyOpen() {
     return StorageService.to.setBool(STORAGE_DEVICE_FIRST_OPEN_KEY, true);
   }

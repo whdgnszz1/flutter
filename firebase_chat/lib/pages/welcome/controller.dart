@@ -1,4 +1,5 @@
 import 'package:firebase_chat/common/routes/names.dart';
+import 'package:firebase_chat/common/store/config.dart';
 import 'package:firebase_chat/pages/welcome/index.dart';
 import 'package:get/get.dart';
 
@@ -9,7 +10,8 @@ class WelcomeController extends GetxController {
     state.index.value = index;
   }
   
-  handleSignIn() {
+  handleSignIn() async {
+    await ConfigStore.to.saveAlreadyOpen();
     Get.offAndToNamed(AppRoutes.SIGN_IN);
   }
 }

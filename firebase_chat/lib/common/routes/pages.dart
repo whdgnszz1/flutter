@@ -6,6 +6,8 @@ import 'routes.dart';
 
 import 'package:firebase_chat/pages/welcome/index.dart';
 import 'package:firebase_chat/pages/sign_in/index.dart';
+import 'package:firebase_chat/pages/application/index.dart';
+
 
 class AppPages {
   static const INITIAL = AppRoutes.INITIAL;
@@ -26,14 +28,14 @@ class AppPages {
     ),
     //
     // // check if needed to login or not
-    // GetPage(
-    //   name: AppRoutes.Application,
-    //   page: () => ApplicationPage(),
-    //   binding: ApplicationBinding(),
-    //   middlewares: [
-    //     RouteAuthMiddleware(priority: 1),
-    //   ],
-    // ),
+    GetPage(
+      name: AppRoutes.Application,
+      page: () => ApplicationPage(),
+      binding: ApplicationBinding(),
+      middlewares: [
+        // RouteAuthMiddleware(priority: 1),
+      ],
+    ),
     //
     // // 最新路由
     // // 首页
